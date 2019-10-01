@@ -1,26 +1,31 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Form from './Form'
+import Orders from './Orders'
+import FullOrder from './Full'
+import { Route, Link, Switch, Redirect } from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className='App'>
+        <nav>
+          <ul>
+            <li><Link to="/">Orders</Link></li>
+            <li><Link to="/new-order">Make a new order!</Link></li>
+          </ul>
+        </nav>
+        <Switch>
+        <Route path="/orders" exact component={Orders} />
+        <Route path="/new-order" exact component={Form} />
+        <Route path= "/orders/:id" exact component={FullOrder}/>
+        <Redirect to="/orders"/>
+        </Switch>
+
+      </div>
+
+    )
+  }
 }
-
 export default App;
